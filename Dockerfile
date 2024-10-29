@@ -28,10 +28,10 @@ COPY --from=frontend /app/frontend/build ./sports-prediction-backend/build
 ENV NODE_ENV=production
 
 # Set environment variable for Google Cloud Run
-ENV PORT=8080
+ENV PORT=5000
 
 # Expose the required port
-EXPOSE 8080
+EXPOSE 5000
 
 # Start the server
 CMD ["node", "sports-prediction-backend/server.js"]
