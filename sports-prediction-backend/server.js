@@ -16,11 +16,12 @@ app.use('/api/games', gamesRoutes);
 app.use('/api/players', playersRoutes); // Use player routes
 
 if (process.env.NODE_ENV === 'production') {
-    app.use(express.static(path.join(__dirname, 'build')));
+    // Serve static files from the React app
+    app.use(express.static(path.join(__dirname, '../frontend/build'))); // Adjusted path
 
     // Handle client-side routing
     app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, 'build', 'index.html'));
+        res.sendFile(path.join(__dirname, '../frontend/build', 'index.html')); // Adjusted path
     });
 }
 // Start the server

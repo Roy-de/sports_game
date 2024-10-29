@@ -18,14 +18,19 @@ WORKDIR /app
 COPY sports-prediction-backend/package*.json ./sports-prediction-backend/
 RUN npm install --prefix sports-prediction-backend
 
-# Copy backend code and frontend build files into the backend's static directory
+# Copy backend code
 COPY sports-prediction-backend ./sports-prediction-backend
+
+# Copy the built frontend files to the backend's static directory
 COPY --from=frontend /app/frontend/build ./sports-prediction-backend/build
 
-# Set environment variables for Google Cloud Run
+# Set environment variable for production
+ENV NODE_ENV=production
+
+# Set environment variable for Google Cloud Run
 ENV PORT=8080
 
-# Expose the required port for Google Cloud Run
+# Expose the required port
 EXPOSE 8080
 
 # Start the server
