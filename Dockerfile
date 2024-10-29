@@ -20,6 +20,8 @@ RUN npm install --prefix sports-prediction-backend
 
 # Copy backend code
 COPY sports-prediction-backend ./sports-prediction-backend
+# Copy the SQLite database file
+COPY sports-prediction-backend/gameData.db ./sports-prediction-backend/
 
 # Copy the built frontend files to the backend's static directory
 COPY --from=frontend /app/frontend/build ./sports-prediction-backend/build

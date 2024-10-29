@@ -1,5 +1,5 @@
 const express = require('express');
-const db = require('../databaseSetup'); // Assuming you have this set up to connect to SQLite
+const db = require('../databaseSetup');
 
 const router = express.Router();
 

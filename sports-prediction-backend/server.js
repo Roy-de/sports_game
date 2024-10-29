@@ -17,13 +17,14 @@ app.use('/api/players', playersRoutes); // Use player routes
 
 if (process.env.NODE_ENV === 'production') {
     // Serve static files from the React app
-    app.use(express.static(path.join(__dirname, '/build'))); // Adjusted path
+    app.use(express.static(path.join(__dirname, 'build'))); // Correct path for serving static files
 
     // Handle client-side routing
     app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, '/build', 'index.html')); // Adjusted path
+        res.sendFile(path.join(__dirname, 'build', 'index.html')); // Correct path for serving index.html
     });
 }
+
 // Start the server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
