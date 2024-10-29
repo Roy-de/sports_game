@@ -1,7 +1,7 @@
 # Stage 1: Build React frontend
 FROM node:14 as frontend
 
-WORKDIR /app/manu
+WORKDIR /app/frontend
 
 # Install dependencies and build the frontend
 COPY frontend/package*.json ./
@@ -20,7 +20,7 @@ RUN npm install --prefix sports-prediction-backend
 
 # Copy backend code and frontend build files into the backend's static directory
 COPY sports-prediction-backend ./sports-prediction-backend
-COPY --from=frontend /app/manu/build ./sports-prediction-backend/build
+COPY --from=frontend /app/frontend/build ./sports-prediction-backend/build
 
 # Set environment variables for Google Cloud Run
 ENV PORT=8080
