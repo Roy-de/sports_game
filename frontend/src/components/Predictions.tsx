@@ -27,7 +27,7 @@ const Predictions = () => {
     useEffect(() => {
         const fetchPlayers = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/players');
+                const response = await fetch('/api/players');
                 if (!response.ok) console.log('Failed to fetch players');
                 const data = await response.json();
                 setPlayers(data);
@@ -41,7 +41,7 @@ const Predictions = () => {
         };
         const fetchGames = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/games');
+                const response = await fetch('/api/games');
                 if (!response.ok) console.log('Failed to fetch players');
                 const data = await response.json();
                 setGames(data)

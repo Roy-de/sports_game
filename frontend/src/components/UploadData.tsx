@@ -26,7 +26,7 @@ const UploadData: React.FC = () => {
     useEffect(() => {
         const fetchPlayers = async () => {
             try {
-                const response = await fetch('http://localhost:5000/api/players');
+                const response = await fetch('/api/players');
                 if (!response.ok) throw new Error('Failed to fetch players');
                 const data = await response.json();
                 setPlayers(data);
@@ -76,7 +76,7 @@ const UploadData: React.FC = () => {
 
         console.log('Game Data Submitted:', formData);
         try {
-            const response = await fetch('http://localhost:5000/api/games', {
+            const response = await fetch('/api/games', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -46,7 +46,7 @@ const PlayerManagement: React.FC = () => {
 
         if (!selectedPlayer) return;
 
-        const response = await fetch(`http://localhost:5000/api/players/${selectedPlayer.id}`, {
+        const response = await fetch(`/api/players/${selectedPlayer.id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ const PlayerManagement: React.FC = () => {
     };
 
     const handleDeletePlayer = async (id: number) => {
-        const response = await fetch(`http://localhost:5000/api/players/${id}`, {
+        const response = await fetch(`/api/players/${id}`, {
             method: 'DELETE',
         });
 
@@ -103,7 +103,7 @@ const PlayerManagement: React.FC = () => {
                 </form>
                 <div className={"border border-slate-200 w-full"}/>
                 {/* Player Table */}
-                <table className="w-full border-collapse border border-gray-300 mt-4 h-screen overflow-y-scroll">
+                <table className="w-full border-collapse border border-gray-300 mt-4  overflow-y-scroll">
                     <thead className={"bg-gradient-to-r from-[#005dff] via-[#9935b9] to-[#fd185a] text-white px-4 py-2 font-bold"}>
                     <tr>
                         <th className="px-10 py-2 text-left">Player Name</th>
