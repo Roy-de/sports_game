@@ -1,10 +1,11 @@
+const path = require("path");
 const sqlite3 = require("sqlite3").verbose();
 
-const db = new sqlite3.Database("gameData.db", sqlite3.OPEN_READONLY, (err) => {
+const db = new sqlite3.Database(path.join(__dirname, 'gameData.db'), sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, (err) => {
     if (err) {
-        console.error("Failed to open database:", err.message);
+        console.error('Error opening database ' + err.message);
     } else {
-        console.log("Connected to the database.");
+        console.log('Connected to the SQLite database.');
     }
 });
 
@@ -114,7 +115,7 @@ async function calculatePlayerForm(playerId) {
     return (totalWeight / 4) + playerStrength;
 }
 
-export async function predictMatchOutcome(player1Id, player2Id) {
+async function predictMatchOutcome(player1Id, player2Id) {
     try {
         const player1Form = await calculatePlayerForm(player1Id);
         const player2Form = await calculatePlayerForm(player2Id);
@@ -205,3 +206,5 @@ const testGames = [
     const accuracy = (correctPredictions / totalGames) * 100;
     console.log(`Prediction Accuracy: ${accuracy.toFixed(2)}%`);
 })();
+
+module.exports = predictMatchOutcome()
