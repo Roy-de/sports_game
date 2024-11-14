@@ -29,10 +29,10 @@ def keypress_listener():
 
 
 def open_page():
-    global stop_extraction
+    global stop_extraction, total_pages
     # Configure Selenium to use Chrome
     chrome_options = Options()
-    #chrome_options.add_argument("--headless")  # Uncomment if you want to run headlessly
+    chrome_options.add_argument("--headless")  # Uncomment if you want to run headlessly
     chrome_service = Service(ChromeDriverManager().install())
 
     # Start the WebDriver

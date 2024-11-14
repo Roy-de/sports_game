@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const gamesRoutes = require('./routes/games');
 const playersRoutes = require('./routes/players');
+const modelsRoutes = require('./routes/model');
 const path = require('path');
 
 const app = express();
@@ -14,6 +15,7 @@ app.use(bodyParser.json());
 // Routes
 app.use('/api/games', gamesRoutes);
 app.use('/api/players', playersRoutes); // Use player routes
+app.use('/predict', modelsRoutes)
 
 if (process.env.NODE_ENV === 'production') {
     // Serve static files from the React app

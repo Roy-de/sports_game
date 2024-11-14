@@ -23,6 +23,11 @@ const Predictions = () => {
     const [player1, setPlayer1] = useState<Players | null>(null);
     const [player2, setPlayer2] = useState<Players | null>(null);
     const [games, setGames] = useState<Game[]>([]);
+    const [prediction, setPrediction] = useState({
+        player1Win: 0,
+        player2Win: 0,
+        draw: 0
+    });
 
     useEffect(() => {
         const fetchPlayers = async () => {
@@ -54,30 +59,52 @@ const Predictions = () => {
         fetchGames().then(r => console.log(r))
     }, []);
     // Function to calculate the total games and win/loss percentage
-    const calculateWinLossPercentage = (player: Players | null) => {
-        if (!player) return { win: 0, loss: 0, draw: 0 }; // Prevent access to undefined player
-        const totalGames = player.wins + player.losses + player.draws;
-        return totalGames > 0
-            ? {
-                win: (player.wins / totalGames) * 100,
-                loss: (player.losses / totalGames) * 100,
-                draw: (player.draws / totalGames) * 100
+
+    // Function to fetch predictions from the backend
+    const fetchPrediction = async () => {
+        if (!player1 || !player2) return;
+
+        try {
+            const response = await fetch('/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    player1Id: player1.id,
+                    player2Id: player2.id
+                })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                setPrediction({
+                    player1Win: data.probabilities.player1Win,
+                    player2Win: data.probabilities.player2Win,
+                    draw: data.probabilities.draw
+                });
+            } else {
+                console.error('Failed to fetch prediction');
             }
-            : { win: 0, loss: 0, draw: 0 }; // Prevent division by zero
+        } catch (error) {
+            console.error('Error fetching prediction:', error);
+        }
     };
 
-    // Calculate stats only if players are set
-    const player1Stats = calculateWinLossPercentage(player1);
-    const player2Stats = calculateWinLossPercentage(player2);
-
-    const totalWinPercentage = player1Stats.win + player2Stats.win + player1Stats.draw + player2Stats.draw;
-    const player1Chance = (totalWinPercentage > 0 ? player1Stats.win / totalWinPercentage : 0) * 100;
-    const player2Chance = (totalWinPercentage > 0 ? player2Stats.win / totalWinPercentage : 0) * 100;
-    const drawChance = (totalWinPercentage > 0 ? (player1Stats.draw + player2Stats.draw) / totalWinPercentage : 0) * 100;
+    useEffect(() => {
+        if (player1 && player2) {
+            fetchPrediction();
+        }
+    }, [player1, player2]);
 
     if (players.length === 0) {
         return <div>Loading players...</div>; // Loading state
     }
+
+    // Display the predicted chances based on server response
+    const player1Chance = prediction.player1Win * 100;
+    const player2Chance = prediction.player2Win * 100;
+    const drawChance = prediction.draw * 100;
 
     const getTotalGamesPlayed = (playerId: number) => {
         return games.reduce((count, game) => {
