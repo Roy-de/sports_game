@@ -1,5 +1,5 @@
 const express = require('express');
-const {predictMatchOutcome} = require('../models');
+const {predictMatchOutcome} = require("../models");
 
 const router = express.Router();
 

@@ -154,20 +154,21 @@ async function predictMatchOutcome(player1Id, player2Id) {
 }
 
 
-const testGames = [
-    { player1Id: 325, player2Id: 1189, actualOutcome: 1 },
-    { player1Id: 487, player2Id: 271, actualOutcome: 1 },
-    { player1Id: 1243, player2Id: 1783, actualOutcome: 1 },
-    { player1Id: 1297, player2Id: 1405, actualOutcome: -1 },
-    { player1Id: 379, player2Id: 271, actualOutcome: 0 },
-    { player1Id: 487, player2Id: 325, actualOutcome: -1 },
-    { player1Id: 1297, player2Id: 1243, actualOutcome: -1 },
-    { player1Id: 1783, player2Id: 1405, actualOutcome: 1 },
-    { player1Id: 1243, player2Id: 1405, actualOutcome: 1 },
-    { player1Id: 271, player2Id: 325, actualOutcome: -1 },
-];
+// const testGames = [
+//     { player1Id: 325, player2Id: 1189, actualOutcome: 1 },
+//     { player1Id: 487, player2Id: 271, actualOutcome: 1 },
+//     { player1Id: 1243, player2Id: 1783, actualOutcome: 1 },
+//     { player1Id: 1297, player2Id: 1405, actualOutcome: -1 },
+//     { player1Id: 379, player2Id: 271, actualOutcome: 0 },
+//     { player1Id: 487, player2Id: 325, actualOutcome: -1 },
+//     { player1Id: 1297, player2Id: 1243, actualOutcome: -1 },
+//     { player1Id: 1783, player2Id: 1405, actualOutcome: 1 },
+//     { player1Id: 1243, player2Id: 1405, actualOutcome: 1 },
+//     { player1Id: 271, player2Id: 325, actualOutcome: -1 },
+// ];
 
 
+/*
 (async () => {
     let correctPredictions = 0;
     let totalGames = testGames.length;
@@ -206,5 +207,8 @@ const testGames = [
     const accuracy = (correctPredictions / totalGames) * 100;
     console.log(`Prediction Accuracy: ${accuracy.toFixed(2)}%`);
 })();
+*/
 
-module.exports = predictMatchOutcome()
+module.exports = {
+    predictMatchOutcome
+}

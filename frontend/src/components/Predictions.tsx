@@ -102,9 +102,9 @@ const Predictions = () => {
     }
 
     // Display the predicted chances based on server response
-    const player1Chance = prediction.player1Win * 100;
-    const player2Chance = prediction.player2Win * 100;
-    const drawChance = prediction.draw * 100;
+    const player1Chance = prediction.player1Win ;
+    const player2Chance = prediction.player2Win ;
+    const drawChance = prediction.draw;
 
     const getTotalGamesPlayed = (playerId: number) => {
         return games.reduce((count, game) => {
@@ -204,37 +204,17 @@ const Predictions = () => {
                                 }}
                             />
 
-                            {/* Player 1 Percentage */}
-                            <div
-                                className="absolute text-[#ff0000] font-bold"
-                                style={{
-                                    left: `${(player1Chance / 100) * 50}%`,
-                                    transform: 'translateX(-50%)',
-                                    top: '-40px', // Position above the bar
-                                }}
-                            >
+                            {/* Display percentage labels */}
+                            <div className="absolute text-[#ff0000] font-bold"
+                                 style={{ left: `${player1Chance / 2}%`, transform: 'translateX(-50%)', top: '-40px' }}>
                                 {Math.round(player1Chance)}%
                             </div>
-                            {/* Draw Percentage */}
-                            <div
-                                className="absolute text-gray-700 font-bold"
-                                style={{
-                                    left: `${(player1Chance + (drawChance / 100) * (player2Chance / 2))}%`,
-                                    transform: 'translateX(-50%)',
-                                    top: '-40px', // Position above the bar
-                                }}
-                            >
+                            <div className="absolute text-gray-700 font-bold"
+                                 style={{ left: `${player1Chance + (drawChance / 2)}%`, transform: 'translateX(-50%)', top: '-40px' }}>
                                 {Math.round(drawChance)}%
                             </div>
-                            {/* Player 2 Percentage */}
-                            <div
-                                className="absolute text-[#0000ff] font-bold"
-                                style={{
-                                    left: `${(player1Chance + drawChance + (player2Chance / 100) * 50)}%`,
-                                    transform: 'translateX(-50%)',
-                                    top: '-40px', // Position above the bar
-                                }}
-                            >
+                            <div className="absolute text-[#0000ff] font-bold"
+                                 style={{ left: `${player1Chance + drawChance + (player2Chance / 2)}%`, transform: 'translateX(-50%)', top: '-40px' }}>
                                 {Math.round(player2Chance)}%
                             </div>
                         </div>
